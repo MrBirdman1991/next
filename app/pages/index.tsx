@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { EventList } from '../components/events/eventList'
+import { EventList } from '../components/events/EventList'
 import { getFeaturedEvents } from '../DUMMY_DATA'
 
 const HomePage: NextPage = () => {
