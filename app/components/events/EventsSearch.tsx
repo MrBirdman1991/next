@@ -1,18 +1,19 @@
 import React, { FC } from 'react'
 import { Button } from '../shared/Button'
+import classes from "./search.module.css"
 
 export const EventsSearch: FC = () => {
   return (
-    <form>
-        <div>
-            <div>
+    <form className={classes.form}>
+        <div className={classes.controls}>
+            <div className={classes.control}>
                 <label htmlFor='year'>Year</label>
                 <select id="year">
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                 </select>
             </div>
-            <div>
+            <div className={classes.control}>
                 <label htmlFor='month'>Month</label>
                 <select id="month">
                     <option value="1">January</option>
