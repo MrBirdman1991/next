@@ -14,7 +14,7 @@ export interface ButtonComponent extends BaseProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export type IProps = LinkComponent | ButtonComponent;
+export type IProps = LinkComponent | ButtonComponent | BaseProps;
 
 export const Button: FC<IProps> = (props) => {
   if ("href" in props) {
@@ -25,8 +25,16 @@ export const Button: FC<IProps> = (props) => {
     );
   }
 
+  if("onClick" in props){
+    return (
+      <button onClick={(e) => props.onClick(e)} className={classes.btn}>
+        {props.children}
+      </button>
+    );
+  }
+
   return (
-    <button onClick={(e) => props.onClick(e)} className={classes.btn}>
+    <button type="submit" className={classes.btn}>
       {props.children}
     </button>
   );

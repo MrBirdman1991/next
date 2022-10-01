@@ -50,7 +50,7 @@ export const EventsSearch: FC<IProps> = ({onSearch}) => {
           </select>
         </div>
       </div>
-      <Button onClick={(e) => {}}>Search</Button>
+      <Button>Search</Button>
     </form>
   );
 };
