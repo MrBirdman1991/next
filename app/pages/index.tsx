@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import { EventList } from '../components/events/EventList'
 import { getFeaturedEvents, IEvent } from '../helper/api-util'
 
@@ -14,7 +14,7 @@ const HomePage: NextPage<PageProps> = ({events}) => {
   )
 }
 
-export async function getStaticProps(){
+export  const getStaticProps: GetStaticProps = async() =>{
   const events = await getFeaturedEvents();
   return {
     props: {
