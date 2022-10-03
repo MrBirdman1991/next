@@ -1,12 +1,12 @@
-import { NextPage } from 'next'
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { useRouter } from 'next/router';
 import React from 'react'
 import { EventList } from '../../components/events/EventList';
 import { EventsSearch } from '../../components/events/EventsSearch';
-import { getAllEvents } from '../../DUMMY_DATA'
+import { IEvent } from '../../DUMMY_DATA';
+import { getAllEvents } from '../../helper/api-util'
 
-const EventsPage: NextPage = () => {
-  const events = getAllEvents();
+const EventsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({events}) => {
   const router = useRouter();
 
   function onSearchHandler(year: string, month:string){
@@ -21,6 +21,23 @@ const EventsPage: NextPage = () => {
       <EventList items={events}/>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps<{events: IEvent[] | undefined}> = async () =>{
+  const events = await getAllEvents();
+
+  if(!events || events.length === 0){
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {
+      events
+    },
+    revalidate: 1800
+  }
 }
 
 export default EventsPage;
