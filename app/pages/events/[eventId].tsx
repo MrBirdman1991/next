@@ -4,6 +4,7 @@ import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { ParsedUrlQuery } from "querystring";
 
 const SingleEventPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   event,
@@ -29,18 +30,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
+interface IParams extends ParsedUrlQuery {
+  eventId: string
+}
+
 export const getStaticProps: GetStaticProps<{
   event: IEvent | undefined;
 }> = async (context) => {
-  const id = context.params?.eventId;
+  const {eventId} = context.params as IParams;
 
-  if (!id || Array.isArray(id)) {
+  if (!eventId) {
     return {
       notFound: true,
     };
   }
 
-  const event = await getEventById(id);
+  const event = await getEventById(eventId);
   return {
     props: {
       event,
