@@ -4,6 +4,7 @@ import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
 import DateIcon from "../icons/date-icon";
 import { Button } from "../shared/Button";
+import Image from 'next/image'
 
 import classes from "./item.module.css";
 
@@ -18,7 +19,7 @@ export const EventItem: FC<IEvent> = ({ date, image, location, title, id }) => {
 
   return (
     <li className={classes.item}>
-      <img src={"/" + image} alt={title} />
+      <Image src={"/" + image} alt={title} width={450} height={360}/>
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>

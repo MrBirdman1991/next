@@ -47,6 +47,13 @@ export const getStaticProps: GetStaticProps<{
   }
 
   const event = await getEventById(eventId);
+
+  if (!eventId || !event) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       event,

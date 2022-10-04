@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import { Header } from './Header'
 
 
-export const Layout: FC<{children: JSX.Element}> = (props) => {
+export const Layout: FC<{children: JSX.Element[]}> = (props) => {
   return (
     <>
     <Header/>
