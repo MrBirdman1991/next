@@ -5,6 +5,7 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
+import Comments from "../../components/input/comments";
 
 const SingleEventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   event,
@@ -18,6 +19,7 @@ const SingleEventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> 
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id}/>
     </>
   );
 };

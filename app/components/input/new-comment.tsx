@@ -1,14 +1,25 @@
-import { useRef, useState } from 'react';
-import classes from './new-comment.module.css';
+import { useRef, useState } from "react";
+import type { FC, FormEvent } from "react";
+import classes from "./new-comment.module.css";
 
-function NewComment(props: any) {
+export interface Comment {
+  email: string;
+  name: string;
+  text: string;
+}
+
+interface Props {
+  onAddComment: (comment: Comment) => void;
+}
+
+const NewComment: FC<Props> = (props) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   const commentInputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  function sendCommentHandler(event: any) {
+  function sendCommentHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current?.value;
@@ -17,12 +28,12 @@ function NewComment(props: any) {
 
     if (
       !enteredEmail ||
-      enteredEmail.trim() === '' ||
-      !enteredEmail.includes('@') ||
+      enteredEmail.trim() === "" ||
+      !enteredEmail.includes("@") ||
       !enteredName ||
-      enteredName.trim() === '' ||
+      enteredName.trim() === "" ||
       !enteredComment ||
-      enteredComment.trim() === ''
+      enteredComment.trim() === ""
     ) {
       setIsInvalid(true);
       return;
@@ -36,25 +47,25 @@ function NewComment(props: any) {
   }
 
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={ (e) => sendCommentHandler(e)}>
       <div className={classes.row}>
         <div className={classes.control}>
-          <label htmlFor='email'>Your email</label>
-          <input type='email' id='email' ref={emailInputRef} />
+          <label htmlFor="email">Your email</label>
+          <input type="email" id="email" ref={emailInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='name'>Your name</label>
-          <input type='text' id='name' ref={nameInputRef} />
+          <label htmlFor="name">Your name</label>
+          <input type="text" id="name" ref={nameInputRef} />
         </div>
       </div>
       <div className={classes.control}>
-        <label htmlFor='comment'>Your comment</label>
-        <textarea id='comment' rows={5} ref={commentInputRef}></textarea>
+        <label htmlFor="comment">Your comment</label>
+        <textarea id="comment" rows={5} ref={commentInputRef}></textarea>
       </div>
       {isInvalid && <p>Please enter a valid email address and comment!</p>}
       <button>Submit</button>
     </form>
   );
-}
+};
 
 export default NewComment;

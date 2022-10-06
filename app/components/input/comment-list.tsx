@@ -1,23 +1,24 @@
-import classes from './comment-list.module.css';
+import { FC } from "react";
+import classes from "./comment-list.module.css";
+import { Comment } from "./new-comment";
 
-function CommentList() {
+interface Props {
+  comments: Comment[];
+}
+
+const CommentList: FC<Props> = ({ comments }) => {
   return (
     <ul className={classes.comments}>
-      {/* Render list of comments - fetched from API */}
-      <li>
-        <p>My comment is amazing!</p>
-        <div>
-          By <address>Maximilian</address>
-        </div>
-      </li>
-      <li>
-        <p>My comment is amazing!</p>
-        <div>
-          By <address>Maximilian</address>
-        </div>
-      </li>
+      {comments.map((comment, idx) => (
+        <li key={idx}>
+          <p>{comment.text}</p>
+          <div>
+            By <address>{comment.name}</address>
+          </div>
+        </li>
+      ))}
     </ul>
   );
-}
+};
 
 export default CommentList;
