@@ -12,7 +12,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { email } = req.body as RequesBody;
-    console.log(email);
     if (!email || !email.includes("@"))
       return res.status(422).json("wrong user input");
 
@@ -21,7 +20,7 @@ export default async function handler(
     );
 
     const db = client.db();
-    await db.collection("emails").insertOne({ email });
+    await db.collection("newsletter").insertOne({ email });
     client.close()
     return res.status(201).json({ email });
   }
