@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { getEventById, getFeaturedEvents, IEvent } from "../../helper/api-util";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";

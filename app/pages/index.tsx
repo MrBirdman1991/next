@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import { EventList } from '../components/events/EventList'
 import NewsletterRegistration from '../components/input/newsletter-registration'
 import { getFeaturedEvents, IEvent } from '../helper/api-util'

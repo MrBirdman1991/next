@@ -39,17 +39,9 @@ export default async function handler(
   }
 
   if (req.method === "GET") {
-    const dummy = [
-      {
-        id: "1",
-        email: "schobsie@schwob.de",
-        name: "schwobsie",
-        text: "blablabla",
-        eventId: "33",
-      },
-    ];
+    const storedComments = await db.collection("comments").find().sort({_id: -1}).toArray();
 
-    return res.json(dummy);
+    return res.json(storedComments);
   }
 
   client.close();
